@@ -1,15 +1,27 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { Authenticaion } from "../../Common/Authfunction"
 
 
 
 const Login = () => {
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const credential = {
+        email: email,
+        password: password
+    }
+    Authenticaion('login',credential)
+  }
   return (
     <form action="">
         <label htmlFor="">Enter email</label>
-        <input type="text" />
+        <input type="text" onChange={(e)=>{ setEmail(e.target.value)}}/>
         <label htmlFor="">Enter password</label>
-        <input type="password" />
-        <button> Log in </button>
+        <input type="password" onChange={(e)=>{ setPassword(e.target.value)}}/>
+        <button onClick={handleLogin}> Log in </button>
         <div>
             <p>New here? <Link to="/auth/signup">Sign up </Link></p>
         </div>
